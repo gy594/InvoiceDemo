@@ -1,0 +1,54 @@
+﻿@page
+@model InvoiceDemo.Pages.InvoiceModel
+@{
+    ViewData["Title"] = "Invoice List";
+}
+
+<h2>Invoice List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Issued Date
+            </th>
+            <th>
+                Original Amount
+            </th>
+           <th>
+                Outstanding Amount
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.InvoicesModel != null)
+        {
+            @foreach (var item in Model.InvoicesModel)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssuedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OriginalAmount)
+                    </td> 
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OutstandingAmount)
+                    </td>
+                    
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br/>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+

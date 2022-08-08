@@ -1,0 +1,64 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Is Healthy
+            </th>
+            <th>
+                Last Updated
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.AccountsModel.Accounts != null)
+        {
+            @foreach (var item in Model.AccountsModel.Accounts)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                        @(item.IsHealthy == true)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdated)
+                    </td>
+                    <td>
+                        <a asp-page="./Invoice" asp-route-id="@item.CustomerId">Details</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<br />
+                        
+@{
+    var prevDisabled = !Model.AccountsModel.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.AccountsModel.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.AccountsModel.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-pageNumber="@(Model.AccountsModel.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
